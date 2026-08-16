@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Typography, TextField, Button, Paper, Tabs, Tab } from '@mui/material';
-import { FloatingDots } from '../assets/SvgArt';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -36,7 +35,11 @@ export default function Login() {
         background: 'linear-gradient(160deg, #fdfcf6 0%, #fef9f0 40%, #fef3c7 100%)',
       }}
     >
-      <FloatingDots />
+      {/* Decorative dots */}
+      <Box sx={{ position: 'absolute', top: 60, left: '10%', width: 12, height: 12, borderRadius: '50%', bgcolor: '#fcd34d', opacity: 0.3 }} />
+      <Box sx={{ position: 'absolute', top: '30%', right: '8%', width: 16, height: 16, borderRadius: '50%', bgcolor: '#f5b88a', opacity: 0.25 }} />
+      <Box sx={{ position: 'absolute', bottom: '20%', left: '15%', width: 10, height: 10, borderRadius: '50%', bgcolor: '#4a9e8e', opacity: 0.2 }} />
+      <Box sx={{ position: 'absolute', bottom: 80, right: '20%', width: 8, height: 8, borderRadius: '50%', bgcolor: '#e1894f', opacity: 0.3 }} />
 
       {/* Decorative background circles */}
       <Box sx={{

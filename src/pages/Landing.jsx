@@ -1,117 +1,170 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Typography, Button, Container, Grid } from '@mui/material';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { HeroArt, AiBrainArt, PrivacyArt, HeartbeatArt, PoseArt, WaveDecoration, FloatingDots } from '../assets/SvgArt';
+import { Box, Typography, Button, Grid, Container, Paper, Chip } from '@mui/material';
+import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+import { HeroIllustration, TrackingArt, BrainArt, ShieldArt, ChartArt, WaveBg } from '../assets/SvgArt';
 
 export default function Landing() {
   const navigate = useNavigate();
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: '#fdfcf6', overflow: 'hidden' }}>
-      {/* Navbar - minimal */}
-      <Box sx={{ px: { xs: 3, md: 6 }, py: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="h5" sx={{ fontWeight: 700, color: '#e1894f', letterSpacing: '-0.5px' }}>
+      {/* Navbar */}
+      <Box sx={{
+        px: { xs: 3, md: 8 }, py: 2.5,
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        position: 'relative', zIndex: 10,
+      }}>
+        <Typography variant="h5" sx={{ fontWeight: 700, color: '#e1894f', letterSpacing: '-0.5px', fontSize: '1.5rem' }}>
           heal<span style={{ color: '#4a9e8e' }}>motion</span>
         </Typography>
-        <Button
-          variant="outlined"
-          onClick={() => navigate('/login')}
-          sx={{ borderColor: '#e1894f', color: '#e1894f', '&:hover': { bgcolor: '#e1894f', color: '#fff' } }}
-        >
-          Sign In
-        </Button>
+        <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'center' }}>
+          <Chip label="100% Private" size="small" sx={{ bgcolor: '#e8f5e9', color: '#2e7d32', fontWeight: 500, display: { xs: 'none', sm: 'flex' } }} />
+          <Button
+            variant="outlined"
+            onClick={() => navigate('/login')}
+            sx={{ borderColor: '#e1894f', borderWidth: 2, color: '#e1894f', fontWeight: 600, '&:hover': { bgcolor: '#e1894f', color: '#fff', borderWidth: 2 } }}
+          >
+            Sign In
+          </Button>
+        </Box>
       </Box>
 
-      {/* Hero Section - art heavy */}
-      <Box sx={{ position: 'relative', pt: { xs: 4, md: 8 }, pb: 0 }}>
-        <FloatingDots />
+      {/* Hero Section - Flexy style: bold text left, big art right */}
+      <Container maxWidth="xl" sx={{ px: { xs: 3, md: 8 } }}>
+        <Grid container alignItems="center" sx={{ minHeight: { md: '80vh' }, pt: { xs: 4, md: 0 } }}>
+          <Grid item xs={12} md={5}>
+            <Typography
+              variant="h1"
+              sx={{
+                fontSize: { xs: '2.5rem', sm: '3rem', md: '3.8rem' },
+                fontWeight: 700,
+                lineHeight: 1.1,
+                color: '#1a1a1a',
+                mb: 2.5,
+              }}
+            >
+              Rehab that{' '}
+              <Box component="span" sx={{ color: '#e1894f' }}>watches</Box>,{' '}
+              <Box component="span" sx={{ color: '#4a9e8e' }}>adapts</Box>,{' '}
+              and heals.
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{ color: '#545454', fontWeight: 400, lineHeight: 1.6, mb: 4, maxWidth: 420, fontSize: '1.05rem' }}
+            >
+              AI-powered physiotherapy that detects compensation patterns,
+              tracks your fatigue, and adjusts exercises in real time.
+              All from your webcam. All on your device.
+            </Typography>
+            <Button
+              variant="outlined"
+              onClick={() => navigate('/login')}
+              endIcon={<ArrowForwardIosRoundedIcon />}
+              sx={{
+                py: 1.3, px: 4,
+                borderColor: '#e1894f', borderWidth: 2,
+                color: '#1a1a1a', fontWeight: 700, fontSize: '1rem',
+                '&:hover': { backgroundColor: '#e1894f', color: '#fff', borderWidth: 2 },
+              }}
+            >
+              Get Started
+            </Button>
+          </Grid>
+          <Grid item xs={12} md={7}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: { xs: 5, md: 0 } }}>
+              <HeroIllustration />
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
+
+      {/* Wave transition */}
+      <WaveBg color="#fef3c7" />
+
+      {/* Features Section */}
+      <Box sx={{ bgcolor: '#fef3c7', py: { xs: 8, md: 12 } }}>
         <Container maxWidth="lg">
-          <Grid container alignItems="center" spacing={4}>
-            <Grid item xs={12} md={5}>
-              <Box sx={{ position: 'relative', zIndex: 2 }}>
-                <Typography
-                  variant="h1"
+          <Typography variant="h3" sx={{ fontWeight: 700, textAlign: 'center', mb: 1.5, fontSize: { xs: '1.8rem', md: '2.3rem' } }}>
+            What makes it different
+          </Typography>
+          <Typography variant="body1" sx={{ textAlign: 'center', color: '#545454', mb: 6, maxWidth: 500, mx: 'auto' }}>
+            Not just another pose app. Clinical intelligence built for real recovery.
+          </Typography>
+
+          <Grid container spacing={4}>
+            {[
+              {
+                art: <TrackingArt />,
+                title: 'Real-Time Joint Tracking',
+                desc: '33 body landmarks tracked at video framerate. Joint angles computed in real time with clinical-grade accuracy.',
+              },
+              {
+                art: <BrainArt />,
+                title: 'Compensation Detection',
+                desc: 'Detects when you lean, shift, or avoid a movement due to pain. Adapts your exercise automatically.',
+              },
+              {
+                art: <ChartArt />,
+                title: 'Fatigue Intelligence',
+                desc: 'Monitors ROM decline over reps. When fatigue exceeds 15%, reduces workload to prevent injury.',
+              },
+              {
+                art: <ShieldArt />,
+                title: 'Fully Private',
+                desc: 'Zero data leaves your browser. No server. No account required. Your health data stays yours.',
+              },
+            ].map((feat, i) => (
+              <Grid item xs={12} sm={6} md={3} key={i}>
+                <Paper
+                  elevation={0}
                   sx={{
-                    fontSize: { xs: '2.2rem', md: '3.4rem' },
-                    lineHeight: 1.15,
-                    mb: 2,
-                    background: 'linear-gradient(135deg, #e1894f 0%, #b5613a 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
+                    p: 3, textAlign: 'center', height: '100%',
+                    bgcolor: '#fff', border: '1px solid rgba(0,0,0,0.06)',
+                    borderRadius: 3,
+                    transition: 'transform 0.2s, box-shadow 0.2s',
+                    '&:hover': { transform: 'translateY(-4px)', boxShadow: '0 12px 30px rgba(0,0,0,0.06)' },
                   }}
                 >
-                  Move. Heal. Thrive.
-                </Typography>
-                <Typography variant="body1" sx={{ color: '#545454', mb: 4, fontSize: '1.05rem', maxWidth: 380 }}>
-                  AI-powered rehabilitation that watches, adapts, and heals with you.
-                </Typography>
-                <Button
-                  variant="contained"
-                  size="large"
-                  endIcon={<ArrowForwardIcon />}
-                  onClick={() => navigate('/login')}
-                  sx={{
-                    px: 5, py: 1.5,
-                    background: 'linear-gradient(135deg, #e1894f 0%, #f5b88a 100%)',
-                    boxShadow: '0 8px 25px rgba(225,137,79,0.3)',
-                    fontSize: '1.05rem',
-                    '&:hover': { background: 'linear-gradient(135deg, #b5613a 0%, #e1894f 100%)' },
-                  }}
-                >
-                  Get Started
-                </Button>
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={7}>
-              <Box sx={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
-                {/* Large gradient background blob behind art */}
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    width: '110%',
-                    height: '110%',
-                    borderRadius: '50%',
-                    background: 'radial-gradient(circle, rgba(252,211,77,0.15) 0%, rgba(225,137,79,0.05) 70%, transparent 100%)',
-                    top: '-5%',
-                    left: '-5%',
-                  }}
-                />
-                <HeroArt width={420} height={420} />
-              </Box>
-            </Grid>
+                  <Box sx={{ mb: 2 }}>{feat.art}</Box>
+                  <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, fontSize: '1rem' }}>{feat.title}</Typography>
+                  <Typography variant="body2" sx={{ color: '#545454', lineHeight: 1.6 }}>{feat.desc}</Typography>
+                </Paper>
+              </Grid>
+            ))}
           </Grid>
         </Container>
       </Box>
 
-      {/* Wave transition */}
-      <WaveDecoration color="#fef9f0" />
+      <WaveBg color="#fdfcf6" flip />
 
-      {/* Features - icon cards, minimal text */}
-      <Box sx={{ bgcolor: '#fef9f0', py: { xs: 6, md: 10 }, position: 'relative' }}>
+      {/* How it works */}
+      <Box sx={{ py: { xs: 8, md: 12 } }}>
         <Container maxWidth="md">
-          <Grid container spacing={4} justifyContent="center">
+          <Typography variant="h3" sx={{ fontWeight: 700, textAlign: 'center', mb: 6, fontSize: { xs: '1.8rem', md: '2.3rem' } }}>
+            How it works
+          </Typography>
+          <Grid container spacing={4}>
             {[
-              { art: <PoseArt size={70} />, label: 'Real-Time Pose AI' },
-              { art: <AiBrainArt size={70} />, label: 'Smart Adaptation' },
-              { art: <HeartbeatArt size={70} />, label: 'Fatigue Detection' },
-              { art: <PrivacyArt size={70} />, label: '100% Private' },
-            ].map((item, idx) => (
-              <Grid item xs={6} sm={3} key={idx}>
-                <Box sx={{ textAlign: 'center' }}>
+              { step: '01', title: 'Open your webcam', desc: 'No app to install. Works in Chrome, Edge, or Firefox on any device with a camera.', color: '#e1894f' },
+              { step: '02', title: 'Choose your exercise', desc: 'Pick from our clinically-designed library targeting shoulders, knees, hips, neck, or full body.', color: '#4a9e8e' },
+              { step: '03', title: 'Move and get feedback', desc: 'AI tracks your joints, counts reps, detects compensation, and adjusts difficulty live.', color: '#e1894f' },
+              { step: '04', title: 'Export your report', desc: 'Download a clinical PDF with ROM, symmetry scores, and insights for your doctor.', color: '#4a9e8e' },
+            ].map((item, i) => (
+              <Grid item xs={12} sm={6} key={i}>
+                <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
                   <Box sx={{
-                    display: 'inline-flex',
-                    p: 2,
-                    borderRadius: '50%',
-                    bgcolor: '#fff',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
-                    mb: 1.5,
+                    minWidth: 48, height: 48, borderRadius: '50%',
+                    bgcolor: item.color, color: '#fff',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontWeight: 700, fontSize: '1rem',
                   }}>
-                    {item.art}
+                    {item.step}
                   </Box>
-                  <Typography variant="body2" sx={{ fontWeight: 600, color: '#1a1a1a' }}>
-                    {item.label}
-                  </Typography>
+                  <Box>
+                    <Typography variant="h6" sx={{ fontWeight: 700, mb: 0.5, fontSize: '1rem' }}>{item.title}</Typography>
+                    <Typography variant="body2" sx={{ color: '#545454', lineHeight: 1.6 }}>{item.desc}</Typography>
+                  </Box>
                 </Box>
               </Grid>
             ))}
@@ -119,36 +172,32 @@ export default function Landing() {
         </Container>
       </Box>
 
-      <WaveDecoration color="#fdfcf6" flip />
-
-      {/* Visual CTA */}
-      <Box sx={{ py: { xs: 6, md: 10 }, textAlign: 'center', position: 'relative' }}>
-        <FloatingDots />
+      {/* CTA Section */}
+      <Box sx={{ py: { xs: 6, md: 10 }, textAlign: 'center' }}>
         <Container maxWidth="sm">
-          <Box
-            sx={{
-              p: 5,
-              borderRadius: 4,
-              background: 'linear-gradient(135deg, rgba(252,211,77,0.12) 0%, rgba(74,158,142,0.08) 100%)',
-              border: '1px solid rgba(225,137,79,0.15)',
-            }}
-          >
-            <Typography variant="h4" sx={{ fontWeight: 700, mb: 1, color: '#1a1a1a' }}>
-              Your recovery, reimagined.
+          <Box sx={{
+            p: { xs: 4, md: 6 }, borderRadius: 4,
+            background: 'linear-gradient(135deg, #e1894f 0%, #f5b88a 50%, #fcd34d 100%)',
+            boxShadow: '0 20px 50px rgba(225,137,79,0.2)',
+          }}>
+            <Typography variant="h4" sx={{ fontWeight: 700, color: '#fff', mb: 1.5 }}>
+              Start healing today.
             </Typography>
-            <Typography variant="body2" sx={{ color: '#545454', mb: 3 }}>
-              No downloads. No accounts required. Just open and heal.
+            <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.9)', mb: 3 }}>
+              Free. No account needed. Just you and your webcam.
             </Typography>
             <Button
               variant="contained"
+              size="large"
               onClick={() => navigate('/login')}
               sx={{
-                background: 'linear-gradient(135deg, #4a9e8e 0%, #7bcfbd 100%)',
-                px: 4, py: 1.2,
-                '&:hover': { background: 'linear-gradient(135deg, #2d7566 0%, #4a9e8e 100%)' },
+                px: 5, py: 1.5,
+                bgcolor: '#fff', color: '#e1894f', fontWeight: 700, fontSize: '1rem',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+                '&:hover': { bgcolor: '#fdfcf6' },
               }}
             >
-              Begin Healing →
+              Get Started Free
             </Button>
           </Box>
         </Container>
@@ -156,8 +205,8 @@ export default function Landing() {
 
       {/* Footer */}
       <Box sx={{ py: 3, textAlign: 'center', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
-        <Typography variant="caption" color="text.secondary">
-          healmotion • built with 💛 • CS Girlies Hackathon 2026
+        <Typography variant="body2" sx={{ color: '#9e9e9e' }}>
+          healmotion · CS Girlies Hackathon 2026 · Technology for Wellness
         </Typography>
       </Box>
     </Box>
