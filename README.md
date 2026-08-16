@@ -30,10 +30,10 @@ HealMotion uses your webcam and browser-based AI (MediaPipe PoseLandmarker) to a
 | Pose Detection | MediaPipe Tasks Vision (PoseLandmarker) | Real-time 33-joint pose extraction in browser |
 | Biomechanics Engine | Custom JavaScript | Joint angles, velocity, jerk, symmetry, compensation detection |
 | AI Coach | OpenRouter API with Anthropic Claude | Personalized exercise recommendations and guidance |
-| Data Storage | IndexedDB (idb-keyval) | Encrypted local storage, no server |
+| Data Storage | IndexedDB (idb-keyval) | Local storage, no server |
 | Charts | Recharts | Progress visualization and fatigue curves |
 | Reports | jsPDF | Clinical PDF report generation |
-| Design | Poppins font, custom SVG illustrations | Warm coral/teal/gold aesthetic |
+| Design | Poppins font, custom SVG illustrations | Warm coral/teal/gold palette |
 
 ## Features
 
@@ -79,6 +79,9 @@ Powered by Anthropic Claude via OpenRouter. Provides:
 - Pain management guidance
 - Recovery planning
 
+### Pain Journal
+Track daily pain levels (0 to 10 scale) with notes. Helps identify patterns over time and correlate with exercise sessions.
+
 ### Clinical Reports
 Exportable PDF and CSV containing:
 - Joint ROM measurements in degrees
@@ -105,11 +108,11 @@ healmotion/
 │   ├── index.js                   # Entry point
 │   ├── index.css                  # Global styles
 │   ├── theme/
-│   │   └── theme.js               # MUI theme (Flexy-inspired warm palette)
+│   │   └── theme.js               # MUI theme configuration
 │   ├── assets/
 │   │   └── SvgArt.jsx             # Inline SVG illustrations and decorations
 │   ├── pages/
-│   │   ├── Landing.jsx            # Art-heavy landing page
+│   │   ├── Landing.jsx            # Landing page with illustrations
 │   │   ├── Login.jsx              # Authentication page
 │   │   ├── Dashboard.jsx          # Main dashboard with sidebar navigation
 │   │   ├── Session.jsx            # Exercise session with live pose detection
@@ -126,6 +129,7 @@ healmotion/
 ├── public/
 │   └── index.html
 ├── package.json
+├── vercel.json
 └── README.md
 ```
 
@@ -135,7 +139,7 @@ healmotion/
 Browser (React + MediaPipe)
 
   Layer 1: Pose Extraction
-    MediaPipe PoseLandmarker → 33 joint coordinates per frame
+    MediaPipe PoseLandmarker -> 33 joint coordinates per frame
         |
         v
   Layer 2: Biomechanical Analysis Engine
@@ -192,7 +196,7 @@ Opens at http://localhost:3000
 ### Building for Production
 
 ```bash
-DISABLE_ESLINT_PLUGIN=true npm run build
+CI=false npm run build
 ```
 
 The build folder will contain the production-ready static files.
@@ -218,9 +222,9 @@ To enable the AI Coach feature:
 
 **Best Use of AI** (Bonus): Claude AI integrated for personalized rehabilitation coaching. Used creatively to interpret biomechanical data into actionable health insights, not just as a chatbot wrapper.
 
-## Design Inspiration
+## Design
 
-The warm coral, teal, and gold color palette is inspired by Flexy (Shameed4/Flexy), expanded with custom SVG illustrations, animated floating elements, and gradient treatments to create a welcoming, non-clinical feel for a medical tool.
+The warm coral, teal, and gold color palette was chosen to create a welcoming, non-clinical feel for a medical tool. Custom SVG illustrations with gradient fills and anatomical detail reinforce the rehabilitation context without feeling sterile. The design prioritizes clarity and encouragement over clinical coldness.
 
 ## License
 
